@@ -1,0 +1,566 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00BDF8CC4B3F60070D92AEA2 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF15ACF012D925C1DB2C7206 /* Components.swift */; };
+		015CEA14B48749A15EAA5CEA /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC689C693244EA1B6CBA37E /* AppState.swift */; };
+		0F608F4D1AD00BF03F143E49 /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B326A90DA3C14C868EAF9DDD /* RankingView.swift */; };
+		1079E555EF697D737B18442F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C1FE43D0D405F67A0AEDD8 /* Constants.swift */; };
+		13C5ECFEBF22FB6A706AB74E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6327ECFC326F7A3145EF8E /* AppDelegate.swift */; };
+		145B0682B73D62A32B9660E2 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E03F7349548296737DBCA /* Reachability.swift */; };
+		1B9855E5F6A40986D4046922 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABFEC186F2820E71B00F4E1 /* Theme.swift */; };
+		266CE4B3626D374942F033DB /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 589B466589B35B487AE17F09 /* FirebaseMessaging */; };
+		2C7E07929490B2086ECAC43F /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4284FB129F318CC5B8651523 /* RegisterView.swift */; };
+		36DABBB31AEF21F537BD8309 /* PlayerPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA4EF575E96BD91D8A76144 /* PlayerPickerView.swift */; };
+		4B4D42249C926DDC2C1A5CB4 /* RankingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C5B9F59D40395072DB1CA1 /* RankingViewModel.swift */; };
+		51C621E15774E18D271B2A88 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0A2D17E8A20B9929B099CD /* PushManager.swift */; };
+		60ADEF332A001540E008B29A /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB6B982152F95AF7D95406 /* GameView.swift */; };
+		62DAD45348BA31C34305EB0C /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D29AF58A85893E4AC8C11EA /* Game.swift */; };
+		6B969573C094DC1CC5AF3907 /* Ship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCC23D07D2FC4D35769B916 /* Ship.swift */; };
+		6C3C2EAE07262689F0295F91 /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7724EB0259E057ECDA3CB699 /* GameMode.swift */; };
+		744B28FD6616BF502C6F8A5C /* Turn.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2F8B739C214F4F295621B1 /* Turn.swift */; };
+		7B52CCF9AF4CBCE92BD3E01A /* GridCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD97E81D47210FDF912C1AB /* GridCellView.swift */; };
+		7FFE054801E75F748F09467D /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7F48F4B6B3A7A21A4C960 /* RootView.swift */; };
+		81C0DCC5EFEC811FE14291ED /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B05302CF370F6CFAD301E93 /* MainTabView.swift */; };
+		82DE2ABBEA9611AB1F393A82 /* GameUpdateCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504F3AEAF3719068A0E54E11 /* GameUpdateCenter.swift */; };
+		8661EC342C71D5FD778F328A /* GameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CBBB4554C7179D35B1A66A4 /* GameStatus.swift */; };
+		866CB0897ABDDDEF3DCB51E1 /* BattleshipAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6448E5B9CAD9AE8F4AF216C6 /* BattleshipAPI.swift */; };
+		93F14635262CB43907F5F900 /* FieldCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9302EDF90553D7DFE5B8C /* FieldCalculator.swift */; };
+		9B5FC2D140EE413AAE70E541 /* BattleshipApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34910123A0A67787DFEBE623 /* BattleshipApp.swift */; };
+		9C4DE13D743106B6EEFC31DD /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38348CA45EB74AE0CC98207 /* GameViewModel.swift */; };
+		A2321D0508344DE5747D7221 /* PrepareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960870323355259863CA03E3 /* PrepareView.swift */; };
+		A81F5FBBAA1CB3A5A152CA14 /* Computer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C5AEFF019B164F55D18F72 /* Computer.swift */; };
+		AF0AD7FBE271E4D96C501B07 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5460F5BD6805F0F4D635C9 /* RegisterViewModel.swift */; };
+		B12173C61C1CBC8C01196AB5 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B6CC51E7E7547C7EB12E59 /* HelpView.swift */; };
+		BC803F5A0511A9541EF9DED1 /* PlayerPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE3F0A982008B05249906FB /* PlayerPickerViewModel.swift */; };
+		CA276A87D8826FE331501A02 /* PlayerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A670C7D25751F41E871A418D /* PlayerStore.swift */; };
+		CF230AB14AF1900D5687CAEB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C9DF8ADAA48D3ABE6ED93E /* Player.swift */; };
+		E00170B14C4540B5090CE769 /* GamesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461406C5810E7B220CBB296F /* GamesListView.swift */; };
+		E76D367BD16445788850DD74 /* GameRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B86DEAD4F5885C96BC71D6 /* GameRoute.swift */; };
+		E7B97A2010F27B943B56BB63 /* FirebaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F077ABED23028A361516B590 /* FirebaseConfig.swift */; };
+		E8C98230661CD48A0BABAD2D /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679F361D2C5F4C7A0AACCF6C /* APIError.swift */; };
+		EA3AC55CF0CF883BEF36F4E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0ECE4CC1F18C9143A9EB6299 /* Assets.xcassets */; };
+		F22E18556C22972F2340D02C /* PrepareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACAF0EE7E8548D403E9A6E3 /* PrepareViewModel.swift */; };
+		FAC0827C03660C58E1FF54B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58503F44ABA9AE6CAFE2B4EA /* GoogleService-Info.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0D29AF58A85893E4AC8C11EA /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		0ECE4CC1F18C9143A9EB6299 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1B6327ECFC326F7A3145EF8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1DCC23D07D2FC4D35769B916 /* Ship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ship.swift; sourceTree = "<group>"; };
+		23B6CC51E7E7547C7EB12E59 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		23C5B9F59D40395072DB1CA1 /* RankingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingViewModel.swift; sourceTree = "<group>"; };
+		2AE3F0A982008B05249906FB /* PlayerPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPickerViewModel.swift; sourceTree = "<group>"; };
+		2B05302CF370F6CFAD301E93 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		2C5460F5BD6805F0F4D635C9 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		34910123A0A67787DFEBE623 /* BattleshipApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleshipApp.swift; sourceTree = "<group>"; };
+		4284FB129F318CC5B8651523 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		461406C5810E7B220CBB296F /* GamesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesListView.swift; sourceTree = "<group>"; };
+		4CEB6B982152F95AF7D95406 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		504F3AEAF3719068A0E54E11 /* GameUpdateCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdateCenter.swift; sourceTree = "<group>"; };
+		52C1FE43D0D405F67A0AEDD8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		58503F44ABA9AE6CAFE2B4EA /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5ABFEC186F2820E71B00F4E1 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		5ACAF0EE7E8548D403E9A6E3 /* PrepareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareViewModel.swift; sourceTree = "<group>"; };
+		5DA4EF575E96BD91D8A76144 /* PlayerPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPickerView.swift; sourceTree = "<group>"; };
+		5E0A2D17E8A20B9929B099CD /* PushManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
+		6448E5B9CAD9AE8F4AF216C6 /* BattleshipAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleshipAPI.swift; sourceTree = "<group>"; };
+		64B86DEAD4F5885C96BC71D6 /* GameRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRoute.swift; sourceTree = "<group>"; };
+		65C5AEFF019B164F55D18F72 /* Computer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Computer.swift; sourceTree = "<group>"; };
+		679F361D2C5F4C7A0AACCF6C /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		6CB9302EDF90553D7DFE5B8C /* FieldCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldCalculator.swift; sourceTree = "<group>"; };
+		6CBBB4554C7179D35B1A66A4 /* GameStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStatus.swift; sourceTree = "<group>"; };
+		75C9DF8ADAA48D3ABE6ED93E /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		7724EB0259E057ECDA3CB699 /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
+		960870323355259863CA03E3 /* PrepareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareView.swift; sourceTree = "<group>"; };
+		9CC689C693244EA1B6CBA37E /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		9D2E03F7349548296737DBCA /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		9DE7F48F4B6B3A7A21A4C960 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		A38348CA45EB74AE0CC98207 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		A670C7D25751F41E871A418D /* PlayerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStore.swift; sourceTree = "<group>"; };
+		B326A90DA3C14C868EAF9DDD /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
+		B809AE21A8030F3B28936599 /* Battleship.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Battleship.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAD97E81D47210FDF912C1AB /* GridCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCellView.swift; sourceTree = "<group>"; };
+		DF2F8B739C214F4F295621B1 /* Turn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Turn.swift; sourceTree = "<group>"; };
+		F077ABED23028A361516B590 /* FirebaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConfig.swift; sourceTree = "<group>"; };
+		FF15ACF012D925C1DB2C7206 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BA1F5312EA7120E5D0D3DC65 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				266CE4B3626D374942F033DB /* FirebaseMessaging in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		43F0155C888A3BFDBDA20B7E /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				52C1FE43D0D405F67A0AEDD8 /* Constants.swift */,
+				6CB9302EDF90553D7DFE5B8C /* FieldCalculator.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		5751BA4636D4272290FE49C1 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				A670C7D25751F41E871A418D /* PlayerStore.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		5FE95773C135A9CE70BDB014 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				65C5AEFF019B164F55D18F72 /* Computer.swift */,
+				0D29AF58A85893E4AC8C11EA /* Game.swift */,
+				7724EB0259E057ECDA3CB699 /* GameMode.swift */,
+				6CBBB4554C7179D35B1A66A4 /* GameStatus.swift */,
+				75C9DF8ADAA48D3ABE6ED93E /* Player.swift */,
+				1DCC23D07D2FC4D35769B916 /* Ship.swift */,
+				DF2F8B739C214F4F295621B1 /* Turn.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		6D48748F9318FCA2899A7F7C /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				679F361D2C5F4C7A0AACCF6C /* APIError.swift */,
+				6448E5B9CAD9AE8F4AF216C6 /* BattleshipAPI.swift */,
+				9D2E03F7349548296737DBCA /* Reachability.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		6E620C3574622C3551ADE2F5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0ECE4CC1F18C9143A9EB6299 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		71F75D709A2E88135306369B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				9CC689C693244EA1B6CBA37E /* AppState.swift */,
+				A38348CA45EB74AE0CC98207 /* GameViewModel.swift */,
+				2AE3F0A982008B05249906FB /* PlayerPickerViewModel.swift */,
+				5ACAF0EE7E8548D403E9A6E3 /* PrepareViewModel.swift */,
+				23C5B9F59D40395072DB1CA1 /* RankingViewModel.swift */,
+				2C5460F5BD6805F0F4D635C9 /* RegisterViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		775EE68194ED300CEF227FB7 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				1B6327ECFC326F7A3145EF8E /* AppDelegate.swift */,
+				34910123A0A67787DFEBE623 /* BattleshipApp.swift */,
+				58503F44ABA9AE6CAFE2B4EA /* GoogleService-Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		870B6D132EC93CF7F54F4D22 = {
+			isa = PBXGroup;
+			children = (
+				6E620C3574622C3551ADE2F5 /* Resources */,
+				8BA1AAAA53E5DA3FBAD45E4E /* Sources */,
+				E1FB6FBC8469061BAE1B972D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8BA1AAAA53E5DA3FBAD45E4E /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				775EE68194ED300CEF227FB7 /* App */,
+				43F0155C888A3BFDBDA20B7E /* Common */,
+				5FE95773C135A9CE70BDB014 /* Domain */,
+				6D48748F9318FCA2899A7F7C /* Networking */,
+				D14841345E097F5D64802A63 /* Notifications */,
+				5751BA4636D4272290FE49C1 /* Persistence */,
+				71F75D709A2E88135306369B /* ViewModels */,
+				F066824C38AD640E0DB54B9B /* Views */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		D14841345E097F5D64802A63 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				F077ABED23028A361516B590 /* FirebaseConfig.swift */,
+				504F3AEAF3719068A0E54E11 /* GameUpdateCenter.swift */,
+				5E0A2D17E8A20B9929B099CD /* PushManager.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		E1FB6FBC8469061BAE1B972D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B809AE21A8030F3B28936599 /* Battleship.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F066824C38AD640E0DB54B9B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FF15ACF012D925C1DB2C7206 /* Components.swift */,
+				64B86DEAD4F5885C96BC71D6 /* GameRoute.swift */,
+				461406C5810E7B220CBB296F /* GamesListView.swift */,
+				4CEB6B982152F95AF7D95406 /* GameView.swift */,
+				CAD97E81D47210FDF912C1AB /* GridCellView.swift */,
+				23B6CC51E7E7547C7EB12E59 /* HelpView.swift */,
+				2B05302CF370F6CFAD301E93 /* MainTabView.swift */,
+				5DA4EF575E96BD91D8A76144 /* PlayerPickerView.swift */,
+				960870323355259863CA03E3 /* PrepareView.swift */,
+				B326A90DA3C14C868EAF9DDD /* RankingView.swift */,
+				4284FB129F318CC5B8651523 /* RegisterView.swift */,
+				9DE7F48F4B6B3A7A21A4C960 /* RootView.swift */,
+				5ABFEC186F2820E71B00F4E1 /* Theme.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5C488D6DEE0BB5494B60C966 /* Battleship */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CB3CED499F31CE2619A529F9 /* Build configuration list for PBXNativeTarget "Battleship" */;
+			buildPhases = (
+				34796DBCD5B20A161D516C6D /* Sources */,
+				0576AE51D0041C1E286CD715 /* Resources */,
+				BA1F5312EA7120E5D0D3DC65 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Battleship;
+			packageProductDependencies = (
+				589B466589B35B487AE17F09 /* FirebaseMessaging */,
+			);
+			productName = Battleship;
+			productReference = B809AE21A8030F3B28936599 /* Battleship.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BA7969FB2B71B6023FD8D4BA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					5C488D6DEE0BB5494B60C966 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 76141F848597A1A36922ED5A /* Build configuration list for PBXProject "Battleship" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 870B6D132EC93CF7F54F4D22;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2CC1B6462141DF33E66C160A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = E1FB6FBC8469061BAE1B972D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5C488D6DEE0BB5494B60C966 /* Battleship */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0576AE51D0041C1E286CD715 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA3AC55CF0CF883BEF36F4E9 /* Assets.xcassets in Resources */,
+				FAC0827C03660C58E1FF54B9 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		34796DBCD5B20A161D516C6D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8C98230661CD48A0BABAD2D /* APIError.swift in Sources */,
+				13C5ECFEBF22FB6A706AB74E /* AppDelegate.swift in Sources */,
+				015CEA14B48749A15EAA5CEA /* AppState.swift in Sources */,
+				866CB0897ABDDDEF3DCB51E1 /* BattleshipAPI.swift in Sources */,
+				9B5FC2D140EE413AAE70E541 /* BattleshipApp.swift in Sources */,
+				00BDF8CC4B3F60070D92AEA2 /* Components.swift in Sources */,
+				A81F5FBBAA1CB3A5A152CA14 /* Computer.swift in Sources */,
+				1079E555EF697D737B18442F /* Constants.swift in Sources */,
+				93F14635262CB43907F5F900 /* FieldCalculator.swift in Sources */,
+				E7B97A2010F27B943B56BB63 /* FirebaseConfig.swift in Sources */,
+				62DAD45348BA31C34305EB0C /* Game.swift in Sources */,
+				6C3C2EAE07262689F0295F91 /* GameMode.swift in Sources */,
+				E76D367BD16445788850DD74 /* GameRoute.swift in Sources */,
+				8661EC342C71D5FD778F328A /* GameStatus.swift in Sources */,
+				82DE2ABBEA9611AB1F393A82 /* GameUpdateCenter.swift in Sources */,
+				60ADEF332A001540E008B29A /* GameView.swift in Sources */,
+				9C4DE13D743106B6EEFC31DD /* GameViewModel.swift in Sources */,
+				E00170B14C4540B5090CE769 /* GamesListView.swift in Sources */,
+				7B52CCF9AF4CBCE92BD3E01A /* GridCellView.swift in Sources */,
+				B12173C61C1CBC8C01196AB5 /* HelpView.swift in Sources */,
+				81C0DCC5EFEC811FE14291ED /* MainTabView.swift in Sources */,
+				CF230AB14AF1900D5687CAEB /* Player.swift in Sources */,
+				36DABBB31AEF21F537BD8309 /* PlayerPickerView.swift in Sources */,
+				BC803F5A0511A9541EF9DED1 /* PlayerPickerViewModel.swift in Sources */,
+				CA276A87D8826FE331501A02 /* PlayerStore.swift in Sources */,
+				A2321D0508344DE5747D7221 /* PrepareView.swift in Sources */,
+				F22E18556C22972F2340D02C /* PrepareViewModel.swift in Sources */,
+				51C621E15774E18D271B2A88 /* PushManager.swift in Sources */,
+				0F608F4D1AD00BF03F143E49 /* RankingView.swift in Sources */,
+				4B4D42249C926DDC2C1A5CB4 /* RankingViewModel.swift in Sources */,
+				145B0682B73D62A32B9660E2 /* Reachability.swift in Sources */,
+				2C7E07929490B2086ECAC43F /* RegisterView.swift in Sources */,
+				AF0AD7FBE271E4D96C501B07 /* RegisterViewModel.swift in Sources */,
+				7FFE054801E75F748F09467D /* RootView.swift in Sources */,
+				6B969573C094DC1CC5AF3907 /* Ship.swift in Sources */,
+				1B9855E5F6A40986D4046922 /* Theme.swift in Sources */,
+				744B28FD6616BF502C6F8A5C /* Turn.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4315D51187EE8B4B454156E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sources/App/Battleship.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Sources/App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nick.battleship2020;
+				PRODUCT_NAME = Battleship;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		837C0E77BB4B414FCD3D4C6D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		98411F05D96D18EC502A565D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		DD504BECCCFEAB00EFC87A27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sources/App/Battleship.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Sources/App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nick.battleship2020;
+				PRODUCT_NAME = Battleship;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		76141F848597A1A36922ED5A /* Build configuration list for PBXProject "Battleship" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				837C0E77BB4B414FCD3D4C6D /* Debug */,
+				98411F05D96D18EC502A565D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CB3CED499F31CE2619A529F9 /* Build configuration list for PBXNativeTarget "Battleship" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD504BECCCFEAB00EFC87A27 /* Debug */,
+				4315D51187EE8B4B454156E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2CC1B6462141DF33E66C160A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.29.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		589B466589B35B487AE17F09 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2CC1B6462141DF33E66C160A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = BA7969FB2B71B6023FD8D4BA /* Project object */;
+}
