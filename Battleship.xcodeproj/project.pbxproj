@@ -38,6 +38,7 @@
 		AF0AD7FBE271E4D96C501B07 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5460F5BD6805F0F4D635C9 /* RegisterViewModel.swift */; };
 		B12173C61C1CBC8C01196AB5 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B6CC51E7E7547C7EB12E59 /* HelpView.swift */; };
 		BC803F5A0511A9541EF9DED1 /* PlayerPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE3F0A982008B05249906FB /* PlayerPickerViewModel.swift */; };
+		C44E014DD8583D3FB8127F04 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8CDB78DC98A049B777EDC7E5 /* Localizable.strings */; };
 		CA276A87D8826FE331501A02 /* PlayerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A670C7D25751F41E871A418D /* PlayerStore.swift */; };
 		CF230AB14AF1900D5687CAEB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C9DF8ADAA48D3ABE6ED93E /* Player.swift */; };
 		E00170B14C4540B5090CE769 /* GamesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461406C5810E7B220CBB296F /* GamesListView.swift */; };
@@ -78,7 +79,7 @@
 		6CBBB4554C7179D35B1A66A4 /* GameStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStatus.swift; sourceTree = "<group>"; };
 		75C9DF8ADAA48D3ABE6ED93E /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		7724EB0259E057ECDA3CB699 /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
-		8C0331A83047543100BCB7E3 /* BattleshipRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BattleshipRelease.entitlements; sourceTree = "<group>"; };
+		8A8BEC73BB5A78B2146083A9 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		960870323355259863CA03E3 /* PrepareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareView.swift; sourceTree = "<group>"; };
 		9CC689C693244EA1B6CBA37E /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		9D2E03F7349548296737DBCA /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -86,10 +87,11 @@
 		A38348CA45EB74AE0CC98207 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		A670C7D25751F41E871A418D /* PlayerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStore.swift; sourceTree = "<group>"; };
 		B326A90DA3C14C868EAF9DDD /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
-		B809AE21A8030F3B28936599 /* Battleship.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Battleship.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B809AE21A8030F3B28936599 /* Battleship.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Battleship.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAD97E81D47210FDF912C1AB /* GridCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCellView.swift; sourceTree = "<group>"; };
 		DF2F8B739C214F4F295621B1 /* Turn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Turn.swift; sourceTree = "<group>"; };
 		F077ABED23028A361516B590 /* FirebaseConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConfig.swift; sourceTree = "<group>"; };
+		FE134CAF67DADA0394E44B8A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FF15ACF012D925C1DB2C7206 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				0ECE4CC1F18C9143A9EB6299 /* Assets.xcassets */,
+				8CDB78DC98A049B777EDC7E5 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -180,7 +183,6 @@
 		870B6D132EC93CF7F54F4D22 = {
 			isa = PBXGroup;
 			children = (
-				8C0331A83047543100BCB7E3 /* BattleshipRelease.entitlements */,
 				6E620C3574622C3551ADE2F5 /* Resources */,
 				8BA1AAAA53E5DA3FBAD45E4E /* Sources */,
 				E1FB6FBC8469061BAE1B972D /* Products */,
@@ -271,12 +273,18 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					5C488D6DEE0BB5494B60C966 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = 76141F848597A1A36922ED5A /* Build configuration list for PBXProject "Battleship" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				Base,
+				de,
 				en,
 			);
 			mainGroup = 870B6D132EC93CF7F54F4D22;
@@ -301,6 +309,7 @@
 			files = (
 				EA3AC55CF0CF883BEF36F4E9 /* Assets.xcassets in Resources */,
 				FAC0827C03660C58E1FF54B9 /* GoogleService-Info.plist in Resources */,
+				C44E014DD8583D3FB8127F04 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,15 +362,28 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		8CDB78DC98A049B777EDC7E5 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8A8BEC73BB5A78B2146083A9 /* de */,
+				FE134CAF67DADA0394E44B8A /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		4315D51187EE8B4B454156E7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = GS4MS8TU57;
+				CODE_SIGN_ENTITLEMENTS = Sources/App/Battleship.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Sources/App/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -498,10 +520,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = GS4MS8TU57;
+				CODE_SIGN_ENTITLEMENTS = Sources/App/Battleship.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Sources/App/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

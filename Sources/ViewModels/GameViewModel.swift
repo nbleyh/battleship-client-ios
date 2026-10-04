@@ -15,7 +15,7 @@ final class GameViewModel: ObservableObject {
 
     @Published private(set) var game: Game
     @Published var me: Player
-    @Published var actionText = "Your turn!"
+    @Published var actionText = String(localized: "your_turn")
     @Published var actionIsRed = false
     @Published var showOverviewButton = false
     @Published var isTargetGridEnabled = false
@@ -57,14 +57,14 @@ final class GameViewModel: ObservableObject {
 
     func start() {
         if game.isFinished {
-            actionText = game.isPlayerWinner(me) ? "You have won the game!" : "You have lost the game!"
+            actionText = game.isPlayerWinner(me) ? String(localized: "you_won") : String(localized: "you_lost")
             showOverviewButton = true
             isTargetGridEnabled = false
         } else if game.isPlayerTurn(me) {
             isTargetGridEnabled = true
             beginTurnTimer()
         } else {
-            actionText = "\(opponentName)s' turn..."
+            actionText = String(format: NSLocalizedString("opponent_turn_in_progress", comment: ""), opponentName)
             actionIsRed = true
             isTargetGridEnabled = false
         }
@@ -81,7 +81,7 @@ final class GameViewModel: ObservableObject {
         pollTask?.cancel()
     }
 
-    private var opponentName: String { opponent?.name ?? "Opponent" }
+    private var opponentName: String { opponent?.name ?? String(localized: "opponent_fallback_name") }
 
     // MARK: - Board rendering
 
@@ -141,7 +141,7 @@ final class GameViewModel: ObservableObject {
     private func endMyTurn() {
         showOverviewButton = true
         isTargetGridEnabled = false
-        actionText = "\(opponentName)s' turn..."
+        actionText = String(format: NSLocalizedString("opponent_turn_in_progress", comment: ""), opponentName)
         actionIsRed = true
 
         switch driver {
@@ -182,7 +182,7 @@ final class GameViewModel: ObservableObject {
             finishGame(winner: computer.player)
         } else {
             isTargetGridEnabled = true
-            actionText = "Your turn!"
+            actionText = String(localized: "your_turn")
             actionIsRed = false
             beginTurnTimer()
         }
@@ -193,11 +193,11 @@ final class GameViewModel: ObservableObject {
         isTargetGridEnabled = false
         cancelTurnTimer()
         if winner.name == me.name {
-            actionText = "Congratulations, you won the game!"
+            actionText = String(localized: "congratulations_won")
             me.played += 1
             me.won += 1
         } else {
-            actionText = "You have lost the game!"
+            actionText = String(localized: "you_lost")
             me.played += 1
         }
         onGameFinished(me)
@@ -296,7 +296,7 @@ final class GameViewModel: ObservableObject {
             finishGame(winner: g.isPlayerWinner(me) ? me : (opponent ?? me))
         } else if !wasMyTurn && g.isPlayerTurn(me) {
             isTargetGridEnabled = true
-            actionText = "Your turn!"
+            actionText = String(localized: "your_turn")
             actionIsRed = false
             showOverviewButton = true
             beginTurnTimer()

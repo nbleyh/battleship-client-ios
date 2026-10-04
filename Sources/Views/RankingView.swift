@@ -35,10 +35,10 @@ struct RankingView: View {
 
                 VStack(spacing: 0) {
                     HStack(spacing: 0) {
-                        header("Rank", width: columnWidth)
-                        header("Player", width: columnWidth * 2)
-                        header("Played", width: columnWidth)
-                        header("Won", width: columnWidth)
+                        header("ranking_header_rank", width: columnWidth)
+                        header("ranking_header_player", width: columnWidth * 2)
+                        header("ranking_header_played", width: columnWidth)
+                        header("ranking_header_won", width: columnWidth)
                     }
                     .background(Theme.buttonBackground)
 
@@ -68,7 +68,7 @@ struct RankingView: View {
         .task { await viewModel.refresh() }
     }
 
-    private func header(_ text: String, width: CGFloat) -> some View {
+    private func header(_ text: LocalizedStringKey, width: CGFloat) -> some View {
         Text(text)
             .bold()
             .foregroundColor(.white)

@@ -13,11 +13,11 @@ enum GameMode: Int, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .computerEasy: return "Computer - Easy"
-        case .computerMedium: return "Computer - Medium"
-        case .computerHard: return "Computer - Hard"
-        case .playerRandom: return "Random Player"
-        case .playerSelected: return "Selected Player"
+        case .computerEasy: return String(localized: "mode_computer_easy")
+        case .computerMedium: return String(localized: "mode_computer_medium")
+        case .computerHard: return String(localized: "mode_computer_hard")
+        case .playerRandom: return String(localized: "mode_random_player")
+        case .playerSelected: return String(localized: "mode_selected_player")
         }
     }
 

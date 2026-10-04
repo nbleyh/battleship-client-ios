@@ -11,7 +11,7 @@ final class RegisterViewModel: ObservableObject {
     func register(onSuccess: @escaping (Player) -> Void) {
         let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty, trimmed.count <= 20 else {
-            errorMessage = "The name has to be between 1 and 20 characters long."
+            errorMessage = String(localized: "name_length_error")
             return
         }
         isRegistering = true
@@ -26,10 +26,10 @@ final class RegisterViewModel: ObservableObject {
                 onSuccess(player)
             } catch let error as APIError where error.isPlayerAlreadyExists {
                 isRegistering = false
-                errorMessage = "Player '\(trimmed)' does already exist."
+                errorMessage = String(format: NSLocalizedString("player_already_exists", comment: ""), trimmed)
             } catch {
                 isRegistering = false
-                errorMessage = "Application error occurred."
+                errorMessage = String(localized: "app_error")
             }
         }
     }

@@ -91,15 +91,14 @@ private struct GameRow: View {
 
     private var title: String {
         if game.isFinished {
-            return game.isPlayerWinner(me)
-                ? "\(game.description) - Your have won the game!"
-                : "\(game.description) - Your have lost the game!"
+            return game.description + String(localized: game.isPlayerWinner(me) ? "suffix_won" : "suffix_lost")
         }
         if isMyTurnOrFinished {
-            return "\(game.description) - Your turn!"
+            return game.description + String(localized: "suffix_your_turn")
         }
         if let opponent = game.opponent(of: me) {
-            return "\(game.description) - Waiting for \(opponent.name)'s turn."
+            return game.description
+                + String(format: NSLocalizedString("suffix_waiting_for_turn", comment: ""), opponent.name)
         }
         return game.description
     }
@@ -112,7 +111,7 @@ private struct GameRow: View {
         guard let date = game.lastUpdate else { return "" }
         let formatter = DateFormatter()
         formatter.dateFormat = Constants.dateFormat
-        return "Last update on \(formatter.string(from: date))"
+        return String(format: NSLocalizedString("last_update_on", comment: ""), formatter.string(from: date))
     }
 
     var body: some View {

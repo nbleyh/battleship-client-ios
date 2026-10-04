@@ -79,7 +79,7 @@ final class PushManager: NSObject {
 
     private func postLocalNotification(for game: Game) {
         let content = UNMutableNotificationContent()
-        content.title = "Your turn!"
+        content.title = String(localized: "your_turn")
         content.body = game.description
         content.sound = .default
         let request = UNNotificationRequest(identifier: "game-\(game.gameId)", content: content, trigger: nil)

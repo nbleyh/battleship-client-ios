@@ -39,7 +39,9 @@ final class PrepareViewModel: ObservableObject {
         (isInvitedGame || onlineModesAvailable) ? GameMode.allCases : GameMode.offlineModes
     }
 
-    var headerText: String { "Set your ships (\(shipCells.count)/3)" }
+    var headerText: String {
+        String(format: NSLocalizedString("set_your_ships_header", comment: ""), shipCells.count)
+    }
 
     var canStart: Bool { shipCells.count == Constants.numShips }
 
@@ -97,7 +99,7 @@ final class PrepareViewModel: ObservableObject {
             return .returnedToList
         } catch {
             isSubmitting = false
-            errorMessage = "Application error occurred."
+            errorMessage = String(localized: "app_error")
             return .failed
         }
     }

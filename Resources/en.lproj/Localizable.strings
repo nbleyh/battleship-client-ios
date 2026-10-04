@@ -1,0 +1,46 @@
+/* Simple literals — SwiftUI's Text()/Button()/Label()/.navigationTitle()
+   auto-localize a literal string argument by looking it up here with the
+   literal itself as the key, so these don't need any Swift code changes. */
+"Opponent:" = "Opponent:";
+"Player:" = "Player:";
+"Start Game" = "Start Game";
+"Overview" = "Overview";
+"Games" = "Games";
+"Ranking" = "Ranking";
+"Help" = "Help";
+"Select Player" = "Select Player";
+"Your Name:" = "Your Name:";
+"Register" = "Register";
+"New Game" = "New Game";
+
+/* Looked up explicitly in Swift (ViewModels, GameMode, computed Strings) via
+   String(localized:)/NSLocalizedString, since those values are already
+   plain Strings by the time a Text() displays them. */
+"help_text" = "Aim of the game Ship Battle is to hit all 3 enemy ships.\n\nThe game starts by placing your 3 ships on desired cells of your battlefield.\n\nAfterwards the turn switches between you and the computer. Therfore just click on an empty cell of the computers battlefield. You have 15 seconds for each turn.\n\nEach hit cell with no ship placed gives a hint with the numbers from 0 to 3 indicating how many cells with ships cross the current cell. The position of a ship can cross the current cell horizonal, vertical and diagonal. 0 means this cell is crossed by none ships, 1 means this cell is crossed by 1 ship, etc.";
+"app_error" = "Application error occurred.";
+"name_length_error" = "The name has to be between 1 and 20 characters long.";
+"player_already_exists" = "Player '%@' does already exist.";
+"your_turn" = "Your turn!";
+"congratulations_won" = "Congratulations, you won the game!";
+"you_won" = "You have won the game!";
+"you_lost" = "You have lost the game!";
+"opponent_turn_in_progress" = "%@'s turn...";
+"opponent_fallback_name" = "Opponent";
+
+"ranking_header_rank" = "Rank";
+"ranking_header_player" = "Player";
+"ranking_header_played" = "Played";
+"ranking_header_won" = "Won";
+
+"suffix_won" = " - Your have won the game!";
+"suffix_lost" = " - Your have lost the game!";
+"suffix_your_turn" = " - Your turn!";
+"suffix_waiting_for_turn" = " - Waiting for %@'s turn.";
+"last_update_on" = "Last update on %@";
+"set_your_ships_header" = "Set your ships (%d/3)";
+
+"mode_computer_easy" = "Computer - Easy";
+"mode_computer_medium" = "Computer - Medium";
+"mode_computer_hard" = "Computer - Hard";
+"mode_random_player" = "Random Player";
+"mode_selected_player" = "Selected Player";

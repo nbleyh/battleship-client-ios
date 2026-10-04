@@ -1,0 +1,40 @@
+"Opponent:" = "Gegner:";
+"Player:" = "Spieler:";
+"Start Game" = "Spiel starten";
+"Overview" = "Übersicht";
+"Games" = "Spiele";
+"Ranking" = "Rangliste";
+"Help" = "Hilfe";
+"Select Player" = "Spieler auswählen";
+"Your Name:" = "Dein Name:";
+"Register" = "Registrieren";
+"New Game" = "Neues Spiel";
+
+"help_text" = "Ziel von Ship Battle ist es, alle 3 gegnerischen Schiffe zu treffen.\n\nZu Beginn platzierst du deine 3 Schiffe auf beliebigen Feldern deines Spielfelds.\n\nAnschließend wechseln sich du und der Computer mit den Zügen ab. Tippe dazu einfach auf ein leeres Feld des gegnerischen Spielfelds. Für jeden Zug hast du 15 Sekunden Zeit.\n\nJedes getroffene Feld ohne Schiff zeigt eine Zahl von 0 bis 3, die angibt, wie viele Schiffe dieses Feld kreuzen. Die Position eines Schiffs kann das Feld horizontal, vertikal oder diagonal kreuzen. 0 bedeutet, das Feld wird von keinem Schiff gekreuzt, 1 bedeutet, es wird von einem Schiff gekreuzt, usw.";
+"app_error" = "Es ist ein Anwendungsfehler aufgetreten.";
+"name_length_error" = "Der Name muss zwischen 1 und 20 Zeichen lang sein.";
+"player_already_exists" = "Spieler '%@' existiert bereits.";
+"your_turn" = "Du bist dran!";
+"congratulations_won" = "Glückwunsch, du hast das Spiel gewonnen!";
+"you_won" = "Du hast das Spiel gewonnen!";
+"you_lost" = "Du hast das Spiel verloren!";
+"opponent_turn_in_progress" = "%@ ist am Zug …";
+"opponent_fallback_name" = "Gegner";
+
+"ranking_header_rank" = "Rang";
+"ranking_header_player" = "Spieler";
+"ranking_header_played" = "Gespielt";
+"ranking_header_won" = "Gewonnen";
+
+"suffix_won" = " - Du hast das Spiel gewonnen!";
+"suffix_lost" = " - Du hast das Spiel verloren!";
+"suffix_your_turn" = " - Du bist dran!";
+"suffix_waiting_for_turn" = " - Warte, bis %@ dran ist.";
+"last_update_on" = "Letztes Update am %@";
+"set_your_ships_header" = "Platziere deine Schiffe (%d/3)";
+
+"mode_computer_easy" = "Computer - Leicht";
+"mode_computer_medium" = "Computer - Mittel";
+"mode_computer_hard" = "Computer - Schwer";
+"mode_random_player" = "Zufälliger Spieler";
+"mode_selected_player" = "Ausgewählter Spieler";

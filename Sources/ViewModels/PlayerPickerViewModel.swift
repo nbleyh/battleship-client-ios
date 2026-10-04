@@ -14,7 +14,7 @@ final class PlayerPickerViewModel: ObservableObject {
             fetched.removeAll { $0.name == me.name }
             players = fetched
         } catch {
-            errorMessage = "Application error occurred."
+            errorMessage = String(localized: "app_error")
         }
     }
 }

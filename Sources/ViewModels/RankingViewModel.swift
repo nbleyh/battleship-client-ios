@@ -17,7 +17,7 @@ final class RankingViewModel: ObservableObject {
             players = ranked
             errorMessage = nil
         } catch {
-            errorMessage = "Application error occurred."
+            errorMessage = String(localized: "app_error")
         }
     }
 }
