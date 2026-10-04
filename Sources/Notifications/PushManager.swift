@@ -30,20 +30,60 @@ final class PushManager: NSObject {
             guard granted else { return }
             Task { @MainActor in
                 UIApplication.shared.registerForRemoteNotifications()
+                PushManager.shared.syncCurrentToken()
+            }
+        }
+    }
+
+    /// Explicitly fetches FCM's current (possibly already-cached) token and
+    /// sends it to the server. `didReceiveRegistrationToken` below only fires
+    /// on an actual token *change* — if Firebase minted the token at launch,
+    /// before `currentPlayer` was known (e.g. `configure()` wiring up the
+    /// delegate happens well before `AppState` finishes fetching the signed-in
+    /// player), that one-shot event already fired into a no-op and the server
+    /// never learned the token, leaving `firebase_token` empty forever for
+    /// this install — mirrors Android's analogous `syncCurrentFcmToken`.
+    private func syncCurrentToken() {
+        Messaging.messaging().token { [weak self] token, _ in
+            guard let token else { return }
+            Task { @MainActor in
+                guard var player = self?.currentPlayer, player.firebaseToken != token else { return }
+                player.firebaseToken = token
+                self?.currentPlayer = player
+                _ = try? await BattleshipAPI.shared.updatePlayer(player)
             }
         }
     }
 
     /// Handles a "your turn" push (foreground or background data message):
-    /// fetches the full updated game and broadcasts it locally via
-    /// `GameUpdateCenter`, mirroring `BattleshipFirebaseService.onMessageReceived`.
+    /// fetches the full updated game, broadcasts it locally via
+    /// `GameUpdateCenter` (mirroring `BattleshipFirebaseService.onMessageReceived`),
+    /// and — since the server sends a data-only message with no `notification`
+    /// payload, which iOS never displays on its own — posts a local
+    /// notification exactly when Android's `GameNotificationHelper.notifyYourTurn`
+    /// would (skipped once the game is finished or it's not actually this
+    /// player's turn, e.g. the push arrived late after another refresh already
+    /// moved things along).
     func handleRemoteMessage(_ userInfo: [AnyHashable: Any]) {
         guard let idString = userInfo["updated_game"] as? String, let gameId = Int(idString) else { return }
         Task {
-            if let game = try? await BattleshipAPI.shared.getGame(gameId) {
-                await MainActor.run { GameUpdateCenter.post(game) }
+            guard let game = try? await BattleshipAPI.shared.getGame(gameId) else { return }
+            await MainActor.run {
+                GameUpdateCenter.post(game)
+                if let me = currentPlayer, !game.isFinished, game.isPlayerTurn(me) {
+                    postLocalNotification(for: game)
+                }
             }
         }
+    }
+
+    private func postLocalNotification(for game: Game) {
+        let content = UNMutableNotificationContent()
+        content.title = "Your turn!"
+        content.body = game.description
+        content.sound = .default
+        let request = UNNotificationRequest(identifier: "game-\(game.gameId)", content: content, trigger: nil)
+        UNUserNotificationCenter.current().add(request)
     }
 }
 
