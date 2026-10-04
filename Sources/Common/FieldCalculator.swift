@@ -1,7 +1,7 @@
 import Foundation
 
 /// Port of the Android FieldCalculator: given a set of ship positions, computes
-/// a 6x6 grid where each cell holds either 9 (a ship) or a count from 0-3 of how
+/// an NxN grid (N = Constants.numFields) where each cell holds either 9 (a ship) or a count from 0-3 of how
 /// many ships cross that cell horizontally, vertically, or diagonally.
 enum FieldCalculator {
     static func calculateFieldValues(_ ships: Set<Ship>) -> [[Int]] {
