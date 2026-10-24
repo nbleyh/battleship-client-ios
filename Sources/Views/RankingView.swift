@@ -72,6 +72,8 @@ struct RankingView: View {
         Text(text)
             .bold()
             .foregroundColor(.white)
+            .lineLimit(1)
+            .minimumScaleFactor(0.6)
             .padding(.vertical, 6)
             .padding(.leading, cellInset)
             .frame(width: width, alignment: .leading)
