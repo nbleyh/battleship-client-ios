@@ -262,7 +262,16 @@ final class GameViewModel: ObservableObject {
                 if Task.isCancelled { return }
                 guard let self else { return }
                 if let updated = try? await self.api.getGame(self.game.gameId) {
-                    self.refresh(with: updated)
+                    // Only feed a genuinely-changed game into refresh(): it
+                    // unconditionally re-applies the opponent's last turn
+                    // (including a hit vibration), so calling it on every
+                    // unchanged poll tick would re-vibrate/re-render
+                    // needlessly — mirrors Android's PlayerGameActivity.pollCallback.
+                    if let opponent,
+                       updated.status != self.game.status
+                        || updated.turns(for: opponent).count != self.game.turns(for: opponent).count {
+                        self.refresh(with: updated)
+                    }
                 }
             }
         }
