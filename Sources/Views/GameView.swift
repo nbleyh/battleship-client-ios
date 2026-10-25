@@ -14,47 +14,55 @@ struct GameView: View {
     }
 
     var body: some View {
-        ZStack(alignment: .bottomLeading) {
-            ScrollView {
-                VStack(spacing: 10) {
-                    Text(viewModel.actionText)
-                        .foregroundColor(viewModel.actionIsRed ? .red : .white)
+        ScrollView {
+            VStack(spacing: 10) {
+                Text(viewModel.actionText)
+                    .foregroundColor(viewModel.actionIsRed ? .red : .white)
 
-                    if viewModel.isTimerVisible {
-                        ProgressView(value: viewModel.timerFraction)
-                            .tint(Theme.progressTint)
-                            .padding(.horizontal, 10)
-                    } else {
-                        Color.clear.frame(height: 4)
-                    }
+                if viewModel.isTimerVisible {
+                    ProgressView(value: viewModel.timerFraction)
+                        .tint(Theme.progressTint)
+                        .padding(.horizontal, 10)
+                } else {
+                    Color.clear.frame(height: 4)
+                }
 
-                    myGrid
+                myGrid
 
-                    SectionDivider()
+                SectionDivider()
 
-                    targetGrid
+                targetGrid
 
-                    SectionDivider()
+                SectionDivider()
 
-                    if viewModel.showOverviewButton {
-                        Button("Overview") { goToOverview() }
-                            .buttonStyle(BattleshipButtonStyle())
+                // Same row/height as the Overview button — a ZStack rather
+                // than an HStack so the button stays centered exactly as
+                // before (BattleshipButtonStyle doesn't fill width) while the
+                // icon independently pins to the leading edge of that row.
+                if viewModel.showOverviewButton || viewModel.showDoubleShotIcon {
+                    ZStack {
+                        if viewModel.showOverviewButton {
+                            Button("Overview") { goToOverview() }
+                                .buttonStyle(BattleshipButtonStyle())
+                        }
+                        if viewModel.showDoubleShotIcon {
+                            HStack {
+                                doubleShotIcon
+                                Spacer()
+                            }
+                        }
                     }
                 }
-                .padding(.vertical, 12)
             }
-            .screenBackground()
-            .navigationBarBackButtonHidden(true)
-            .onAppear {
-                viewModel.configure(appState: appState)
-                viewModel.start()
-            }
-            .onDisappear { viewModel.stop() }
-
-            if viewModel.showDoubleShotIcon {
-                doubleShotIcon
-            }
+            .padding(.vertical, 12)
         }
+        .screenBackground()
+        .navigationBarBackButtonHidden(true)
+        .onAppear {
+            viewModel.configure(appState: appState)
+            viewModel.start()
+        }
+        .onDisappear { viewModel.stop() }
     }
 
     /// Status indicator only for now — not yet wired to an actual
@@ -66,7 +74,7 @@ struct GameView: View {
             .frame(width: 40, height: 40)
             .grayscale(viewModel.canDoubleShot ? 0 : 1)
             .opacity(viewModel.canDoubleShot ? 1 : 0.5)
-            .padding(12)
+            .padding(.horizontal, 12)
     }
 
     private var myGrid: some View {
