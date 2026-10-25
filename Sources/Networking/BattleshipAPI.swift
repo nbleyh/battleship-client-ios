@@ -51,6 +51,11 @@ actor BattleshipAPI {
         try await perform("player/list", method: "GET")
     }
 
+    func getCoins(for playerName: String) async throws -> Int {
+        let response: CoinsResponse = try await perform("player/\(encodedPathComponent(playerName))/coins", method: "GET")
+        return response.coins
+    }
+
     func getGames(for playerName: String) async throws -> [Game] {
         try await perform("game/list/\(encodedPathComponent(playerName))", method: "GET")
     }
@@ -117,4 +122,9 @@ actor BattleshipAPI {
             throw APIError.decoding(error)
         }
     }
+}
+
+/// Wire shape of GET/PUT .../coins: {"coins": N}.
+private struct CoinsResponse: Decodable {
+    let coins: Int
 }

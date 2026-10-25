@@ -6,6 +6,7 @@
 "Start Game" = "Start Game";
 "Overview" = "Overview";
 "Games" = "Games";
+"coins_header" = "%@: %d Coins";
 "Ranking" = "Ranking";
 "Help" = "Help";
 "Select Player" = "Select Player";

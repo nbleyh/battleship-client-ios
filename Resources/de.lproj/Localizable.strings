@@ -3,6 +3,7 @@
 "Start Game" = "Spiel starten";
 "Overview" = "Übersicht";
 "Games" = "Spiele";
+"coins_header" = "%@: %d Münzen";
 "Ranking" = "Rangliste";
 "Help" = "Hilfe";
 "Select Player" = "Spieler auswählen";
