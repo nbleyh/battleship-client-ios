@@ -25,6 +25,15 @@ final class GameViewModel: ObservableObject {
     /// nil until the initial fetch resolves — the icon stays hidden rather
     /// than momentarily showing greyed-out-for-0 before the real balance loads.
     @Published private(set) var coins: Int?
+    /// Toggled by tapping the (enabled) double-shot icon — see `toggleDoubleShot()`.
+    /// While selected: the icon gets a bold border, the turn timer restarts at 30s
+    /// (instead of 15s) so there's time for 2 shots, and `tapTargetCell` lets the
+    /// first of those 2 shots fall through without ending the turn. The 2 coins are
+    /// actually spent only once the turn that used it ends (see
+    /// `spendDoubleShotIfSelected()`) — not here, so toggling it back off before
+    /// firing costs nothing.
+    @Published var isDoubleShotSelected = false
+    private var shotsFiredThisTurn = 0
 
     /// Double-shot only makes sense against a real opponent — a computer
     /// game never round-trips through the server to spend it against.
@@ -143,7 +152,6 @@ final class GameViewModel: ObservableObject {
         guard isTargetGridEnabled else { return }
         guard !game.turns(for: me).contains(where: { $0.x == x && $0.y == y }) else { return }
 
-        cancelTurnTimer()
         let turn = Turn(x: x, y: y)
         let value = game.fire(turn, by: me)
         if value == 9 {
@@ -153,14 +161,51 @@ final class GameViewModel: ObservableObject {
         if game.hits(for: me) == Constants.numShips {
             game.setWinner(me)
             finishGame(winner: me)
-        } else {
+        } else if shouldEndTurnAfterShot() {
             endMyTurn()
         }
+        // else: double-shot's first of 2 shots — this shot's visual update
+        // above already happened; leave the grid (and timer) running for
+        // the second one instead of ending the turn.
+    }
+
+    /// Whether firing at the cell just hit/missed should end the turn.
+    /// Always true for one shot per turn — false after the first of 2 when
+    /// double-shot is selected, so the turn continues for a second tap.
+    private func shouldEndTurnAfterShot() -> Bool {
+        shotsFiredThisTurn += 1
+        return !isDoubleShotSelected || shotsFiredThisTurn >= 2
+    }
+
+    /// Toggled by tapping the double-shot icon. Turning it ON requires
+    /// `canDoubleShot` and that no shot has been fired yet this turn; turning
+    /// it back OFF is always allowed under the same "no shot fired yet" guard.
+    func toggleDoubleShot() {
+        guard isTargetGridEnabled, shotsFiredThisTurn == 0 else { return }
+        guard isDoubleShotSelected || canDoubleShot else { return }
+        isDoubleShotSelected.toggle()
+        beginTurnTimer(seconds: isDoubleShotSelected ? 30 : 15)
+    }
+
+    /// Spends the 2 coins if this turn used double-shot, then resets the
+    /// selection for the next turn. Mirrors Android's
+    /// `spendDoubleShotIfSelected()`, called from the same two places.
+    private func spendDoubleShotIfSelected() {
+        if isDoubleShotSelected {
+            Task { [weak self] in
+                guard let self else { return }
+                _ = try? await self.api.updateCoins(for: self.me.name, delta: -2)
+            }
+        }
+        isDoubleShotSelected = false
+        shotsFiredThisTurn = 0
     }
 
     /// Ends the local player's turn — either because they fired, or because
-    /// the 15s timer ran out (Android auto-ends the turn either way).
+    /// the turn timer ran out (Android auto-ends the turn either way).
     private func endMyTurn() {
+        cancelTurnTimer()
+        spendDoubleShotIfSelected()
         showOverviewButton = true
         isTargetGridEnabled = false
         actionText = String(format: NSLocalizedString("opponent_turn_in_progress", comment: ""), opponentName)
@@ -214,6 +259,7 @@ final class GameViewModel: ObservableObject {
         showOverviewButton = true
         isTargetGridEnabled = false
         cancelTurnTimer()
+        spendDoubleShotIfSelected()
         if winner.name == me.name {
             actionText = String(localized: "congratulations_won")
             me.played += 1
@@ -235,14 +281,14 @@ final class GameViewModel: ObservableObject {
         }
     }
 
-    // MARK: - Turn timer (15s per turn, matching GameCountDownTimer)
+    // MARK: - Turn timer (15s per turn, 30s while double-shot is selected — matching GameCountDownTimer)
 
-    private func beginTurnTimer() {
+    private func beginTurnTimer(seconds: Int = 15) {
         isTimerVisible = true
         timerFraction = 1.0
         timerTask?.cancel()
         timerTask = Task { [weak self] in
-            let totalSteps = 600 // 15000ms / 25ms, matching the Android tick frequency
+            let totalSteps = seconds * 40 // 1000ms / 25ms, matching the Android tick frequency
             for step in 1...totalSteps {
                 try? await Task.sleep(nanoseconds: 25_000_000)
                 if Task.isCancelled { return }

@@ -65,16 +65,24 @@ struct GameView: View {
         .onDisappear { viewModel.stop() }
     }
 
-    /// Status indicator only for now — not yet wired to an actual
-    /// double-shot action; see PlayerGameActivity/GameView comments once
-    /// that mechanic is defined.
+    /// Tapping toggles `isDoubleShotSelected` (bold border while selected),
+    /// mirroring Android's `toggleDoubleShot()`/`setDoubleShotBorder()`.
     private var doubleShotIcon: some View {
         Image("DoubleShotIcon")
             .resizable()
             .frame(width: 40, height: 40)
             .grayscale(viewModel.canDoubleShot ? 0 : 1)
             .opacity(viewModel.canDoubleShot ? 1 : 0.5)
+            .overlay(
+                RoundedRectangle(cornerRadius: 4)
+                    .stroke(Color.white, lineWidth: 3)
+                    .opacity(viewModel.isDoubleShotSelected ? 1 : 0)
+            )
             .padding(.horizontal, 12)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                viewModel.toggleDoubleShot()
+            }
     }
 
     private var myGrid: some View {

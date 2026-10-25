@@ -56,6 +56,13 @@ actor BattleshipAPI {
         return response.coins
     }
 
+    /// Negative to spend, positive to credit — mirrors Android's `processUpdateCoins`.
+    func updateCoins(for playerName: String, delta: Int) async throws -> Int {
+        struct Body: Encodable { let delta: Int }
+        let response: CoinsResponse = try await perform("player/\(encodedPathComponent(playerName))/coins", method: "PUT", body: Body(delta: delta))
+        return response.coins
+    }
+
     func getGames(for playerName: String) async throws -> [Game] {
         try await perform("game/list/\(encodedPathComponent(playerName))", method: "GET")
     }
