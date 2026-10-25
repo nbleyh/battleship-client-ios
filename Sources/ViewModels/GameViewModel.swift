@@ -92,8 +92,10 @@ final class GameViewModel: ObservableObject {
         if case .remote = driver {
             subscribeToUpdates()
             beginPolling()
-            loadCoins()
         }
+        // Header shown for every game, not just remote ones — matches
+        // MainTabView's "name: N Coins" bar (TabedActivity on Android).
+        loadCoins()
     }
 
     /// Refreshed whenever the turn flips back to me (see `refresh(with:)`)

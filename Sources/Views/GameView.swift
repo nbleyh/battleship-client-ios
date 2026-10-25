@@ -16,6 +16,17 @@ struct GameView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 10) {
+                // Same "name: N Coins" bar as MainTabView's — shown for every
+                // game, not just remote ones.
+                if let coins = viewModel.coins {
+                    Text(String(format: NSLocalizedString("coins_header", comment: ""), viewModel.me.name, coins))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 6)
+                        .background(Theme.actionBar)
+                }
+
                 Text(viewModel.actionText)
                     .foregroundColor(viewModel.actionIsRed ? .red : .white)
 
