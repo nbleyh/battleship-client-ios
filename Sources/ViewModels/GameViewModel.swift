@@ -22,6 +22,17 @@ final class GameViewModel: ObservableObject {
     @Published var isTimerVisible = false
     /// 1.0 at turn start, ticking down to 0.0 over the 15s turn limit.
     @Published var timerFraction: Double = 1.0
+    /// nil until the initial fetch resolves — the icon stays hidden rather
+    /// than momentarily showing greyed-out-for-0 before the real balance loads.
+    @Published private(set) var coins: Int?
+
+    /// Double-shot only makes sense against a real opponent — a computer
+    /// game never round-trips through the server to spend it against.
+    var isRemoteGame: Bool { if case .remote = driver { true } else { false } }
+    /// Bottom-left icon: visible for the whole time it's actually my turn,
+    /// in a remote game.
+    var showDoubleShotIcon: Bool { isRemoteGame && isTargetGridEnabled }
+    var canDoubleShot: Bool { (coins ?? 0) >= 2 }
 
     let opponent: Player?
 
@@ -72,6 +83,17 @@ final class GameViewModel: ObservableObject {
         if case .remote = driver {
             subscribeToUpdates()
             beginPolling()
+            loadCoins()
+        }
+    }
+
+    /// Refreshed whenever the turn flips back to me (see `refresh(with:)`)
+    /// too, not just once at `start()` — the balance can change between
+    /// turns once something actually spends it.
+    private func loadCoins() {
+        Task { [weak self] in
+            guard let self else { return }
+            self.coins = try? await self.api.getCoins(for: self.me.name)
         }
     }
 
@@ -309,6 +331,7 @@ final class GameViewModel: ObservableObject {
             actionIsRed = false
             showOverviewButton = true
             beginTurnTimer()
+            loadCoins()
         }
     }
 }

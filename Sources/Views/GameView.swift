@@ -14,41 +14,59 @@ struct GameView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 10) {
-                Text(viewModel.actionText)
-                    .foregroundColor(viewModel.actionIsRed ? .red : .white)
+        ZStack(alignment: .bottomLeading) {
+            ScrollView {
+                VStack(spacing: 10) {
+                    Text(viewModel.actionText)
+                        .foregroundColor(viewModel.actionIsRed ? .red : .white)
 
-                if viewModel.isTimerVisible {
-                    ProgressView(value: viewModel.timerFraction)
-                        .tint(Theme.progressTint)
-                        .padding(.horizontal, 10)
-                } else {
-                    Color.clear.frame(height: 4)
+                    if viewModel.isTimerVisible {
+                        ProgressView(value: viewModel.timerFraction)
+                            .tint(Theme.progressTint)
+                            .padding(.horizontal, 10)
+                    } else {
+                        Color.clear.frame(height: 4)
+                    }
+
+                    myGrid
+
+                    SectionDivider()
+
+                    targetGrid
+
+                    SectionDivider()
+
+                    if viewModel.showOverviewButton {
+                        Button("Overview") { goToOverview() }
+                            .buttonStyle(BattleshipButtonStyle())
+                    }
                 }
-
-                myGrid
-
-                SectionDivider()
-
-                targetGrid
-
-                SectionDivider()
-
-                if viewModel.showOverviewButton {
-                    Button("Overview") { goToOverview() }
-                        .buttonStyle(BattleshipButtonStyle())
-                }
+                .padding(.vertical, 12)
             }
-            .padding(.vertical, 12)
+            .screenBackground()
+            .navigationBarBackButtonHidden(true)
+            .onAppear {
+                viewModel.configure(appState: appState)
+                viewModel.start()
+            }
+            .onDisappear { viewModel.stop() }
+
+            if viewModel.showDoubleShotIcon {
+                doubleShotIcon
+            }
         }
-        .screenBackground()
-        .navigationBarBackButtonHidden(true)
-        .onAppear {
-            viewModel.configure(appState: appState)
-            viewModel.start()
-        }
-        .onDisappear { viewModel.stop() }
+    }
+
+    /// Status indicator only for now — not yet wired to an actual
+    /// double-shot action; see PlayerGameActivity/GameView comments once
+    /// that mechanic is defined.
+    private var doubleShotIcon: some View {
+        Image("DoubleShotIcon")
+            .resizable()
+            .frame(width: 40, height: 40)
+            .grayscale(viewModel.canDoubleShot ? 0 : 1)
+            .opacity(viewModel.canDoubleShot ? 1 : 0.5)
+            .padding(12)
     }
 
     private var myGrid: some View {
