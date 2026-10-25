@@ -14,10 +14,17 @@ actor BattleshipAPI {
     init(session: URLSession = BattleshipAPI.makeSession()) {
         self.session = session
 
+        // Wire format only — the server pins its own timezone to UTC
+        // (date_default_timezone_set('UTC')) and sends/expects naive
+        // "yyyy-MM-dd HH:mm:ss" strings with no zone info, so this must
+        // parse/format as UTC to match, not the device's zone. Converting to
+        // the device's current zone for *display* happens separately,
+        // downstream, wherever a date gets shown to the user (e.g.
+        // GamesListView) — never here.
         let formatter = DateFormatter()
         formatter.dateFormat = Constants.dateFormat
         formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone.current
+        formatter.timeZone = TimeZone(identifier: "UTC")
 
         let enc = JSONEncoder()
         enc.dateEncodingStrategy = .formatted(formatter)

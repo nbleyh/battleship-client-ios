@@ -109,8 +109,16 @@ private struct GameRow: View {
 
     private var lastUpdateText: String {
         guard let date = game.lastUpdate else { return "" }
+        // Display only — `date` itself is already a correct instant (parsed
+        // as UTC in BattleshipAPI, matching what the server sends). Formatting
+        // it with the device's *current* timezone, rather than leaving this
+        // unset, makes the DST conversion explicit and keeps it correct
+        // through a DST transition without any special-casing — TimeZone.current
+        // already resolves the right UTC offset for whatever instant is
+        // being formatted, not a fixed one.
         let formatter = DateFormatter()
         formatter.dateFormat = Constants.dateFormat
+        formatter.timeZone = .current
         return String(format: NSLocalizedString("last_update_on", comment: ""), formatter.string(from: date))
     }
 
