@@ -41,6 +41,11 @@ final class GameViewModel: ObservableObject {
     /// in a remote game.
     var showDoubleShotIcon: Bool { isRemoteGame && isTargetGridEnabled }
     var canDoubleShot: Bool { (coins ?? 0) >= 2 }
+    /// Drives the icon's greyed-out look — distinct from `canDoubleShot`
+    /// (which only gates turning it *on*): once a shot's been fired this
+    /// turn, `toggleDoubleShot()` no-ops either way, so the icon should look
+    /// disabled even while still selected (bordered) for the second shot.
+    var doubleShotIconEnabled: Bool { canDoubleShot && shotsFiredThisTurn == 0 }
 
     let opponent: Player?
 

@@ -82,8 +82,8 @@ struct GameView: View {
         Image("DoubleShotIcon")
             .resizable()
             .frame(width: 40, height: 40)
-            .grayscale(viewModel.canDoubleShot ? 0 : 1)
-            .opacity(viewModel.canDoubleShot ? 1 : 0.5)
+            .grayscale(viewModel.doubleShotIconEnabled ? 0 : 1)
+            .opacity(viewModel.doubleShotIconEnabled ? 1 : 0.5)
             .overlay(
                 RoundedRectangle(cornerRadius: 4)
                     .stroke(Color.red, lineWidth: 3)
