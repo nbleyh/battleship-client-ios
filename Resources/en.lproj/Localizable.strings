@@ -18,6 +18,10 @@
    String(localized:)/NSLocalizedString, since those values are already
    plain Strings by the time a Text() displays them. */
 "help_text" = "Aim of the game Ship Battle is to hit all 3 enemy ships.\n\nThe game starts by placing your 3 ships on desired cells of your battlefield.\n\nAfterwards the turn switches between you and the computer. Therfore just click on an empty cell of the computers battlefield. You have 15 seconds for each turn.\n\nEach hit cell with no ship placed gives a hint with the numbers from 0 to 3 indicating how many cells with ships cross the current cell. The position of a ship can cross the current cell horizonal, vertical and diagonal. 0 means this cell is crossed by none ships, 1 means this cell is crossed by 1 ship, etc.";
+"help_section_1_title" = "1. How to play";
+"help_section_2_title" = "2. Coins";
+"help_coins_text" = "You earn one coin for every game you win against another player (games against a computer don't count). Spend your coins in any game against another player to unlock extra features:";
+"help_double_shot_label" = "Allows 2 shots in a row. 2 coins.";
 "app_error" = "Application error occurred.";
 "name_length_error" = "The name has to be between 1 and 20 characters long.";
 "player_already_exists" = "Player '%@' does already exist.";

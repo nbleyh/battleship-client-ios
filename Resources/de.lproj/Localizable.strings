@@ -12,6 +12,10 @@
 "New Game" = "Neues Spiel";
 
 "help_text" = "Ziel von Ship Battle ist es, alle 3 gegnerischen Schiffe zu treffen.\n\nZu Beginn platzierst du deine 3 Schiffe auf beliebigen Feldern deines Spielfelds.\n\nAnschließend wechseln sich du und der Computer mit den Zügen ab. Tippe dazu einfach auf ein leeres Feld des gegnerischen Spielfelds. Für jeden Zug hast du 15 Sekunden Zeit.\n\nJedes getroffene Feld ohne Schiff zeigt eine Zahl von 0 bis 3, die angibt, wie viele Schiffe dieses Feld kreuzen. Die Position eines Schiffs kann das Feld horizontal, vertikal oder diagonal kreuzen. 0 bedeutet, das Feld wird von keinem Schiff gekreuzt, 1 bedeutet, es wird von einem Schiff gekreuzt, usw.";
+"help_section_1_title" = "1. Spielprinzip";
+"help_section_2_title" = "2. Coins";
+"help_coins_text" = "Für jedes gewonnene Spiel gegen einen anderen Spieler erhältst du einen Coin (Spiele gegen einen Computer zählen nicht). Setze deine Coins in jedem Spiel gegen einen anderen Spieler ein, um Zusatzfunktionen freizuschalten:";
+"help_double_shot_label" = "Erlaubt 2 Züge in Folge. 2 Coins.";
 "app_error" = "Es ist ein Anwendungsfehler aufgetreten.";
 "name_length_error" = "Der Name muss zwischen 1 und 20 Zeichen lang sein.";
 "player_already_exists" = "Spieler '%@' existiert bereits.";
