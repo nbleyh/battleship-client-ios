@@ -182,11 +182,12 @@ final class GameViewModel: ObservableObject {
     /// Toggled by tapping the double-shot icon. Turning it ON requires
     /// `canDoubleShot` and that no shot has been fired yet this turn; turning
     /// it back OFF is always allowed under the same "no shot fired yet" guard.
+    /// The running turn timer is left untouched — toggling the icon doesn't
+    /// reset or extend it.
     func toggleDoubleShot() {
         guard isTargetGridEnabled, shotsFiredThisTurn == 0 else { return }
         guard isDoubleShotSelected || canDoubleShot else { return }
         isDoubleShotSelected.toggle()
-        beginTurnTimer(seconds: isDoubleShotSelected ? 30 : 15)
     }
 
     /// Spends the 2 coins if this turn used double-shot, then resets the
@@ -283,14 +284,14 @@ final class GameViewModel: ObservableObject {
         }
     }
 
-    // MARK: - Turn timer (15s per turn, 30s while double-shot is selected — matching GameCountDownTimer)
+    // MARK: - Turn timer (15s per turn, matching GameCountDownTimer)
 
-    private func beginTurnTimer(seconds: Int = 15) {
+    private func beginTurnTimer() {
         isTimerVisible = true
         timerFraction = 1.0
         timerTask?.cancel()
         timerTask = Task { [weak self] in
-            let totalSteps = seconds * 40 // 1000ms / 25ms, matching the Android tick frequency
+            let totalSteps = 600 // 15000ms / 25ms, matching the Android tick frequency
             for step in 1...totalSteps {
                 try? await Task.sleep(nanoseconds: 25_000_000)
                 if Task.isCancelled { return }
