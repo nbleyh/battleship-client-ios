@@ -26,12 +26,11 @@ final class GameViewModel: ObservableObject {
     /// than momentarily showing greyed-out-for-0 before the real balance loads.
     @Published private(set) var coins: Int?
     /// Toggled by tapping the (enabled) double-shot icon — see `toggleDoubleShot()`.
-    /// While selected: the icon gets a bold border, the turn timer restarts at 30s
-    /// (instead of 15s) so there's time for 2 shots, and `tapTargetCell` lets the
-    /// first of those 2 shots fall through without ending the turn. The 2 coins are
-    /// actually spent only once the turn that used it ends (see
-    /// `spendDoubleShotIfSelected()`) — not here, so toggling it back off before
-    /// firing costs nothing.
+    /// While selected: the icon gets a bold red border, and `tapTargetCell` lets the
+    /// first of those 2 shots fall through without ending the turn. The running
+    /// turn timer is left untouched. The 2 coins are actually spent only once the
+    /// turn that used it ends (see `spendDoubleShotIfSelected()`) — not here, so
+    /// toggling it back off before firing costs nothing.
     @Published var isDoubleShotSelected = false
     private var shotsFiredThisTurn = 0
 
