@@ -2,7 +2,20 @@ import SwiftUI
 
 /// Port of `HelpActivity` / help.xml (static rules text, verbatim).
 struct HelpView: View {
+    @EnvironmentObject private var appState: AppState
+
     var body: some View {
+        VStack(spacing: 0) {
+            if let me = appState.player, let coins = appState.coins {
+                CoinsHeader(name: me.name, coins: coins)
+            }
+
+            helpScrollContent
+        }
+        .screenBackground()
+    }
+
+    private var helpScrollContent: some View {
         ScrollView {
             VStack(spacing: 16) {
                 SectionDivider()
@@ -39,7 +52,6 @@ struct HelpView: View {
             }
             .padding(.vertical, 12)
         }
-        .screenBackground()
     }
 
     private func sectionHeader(_ key: LocalizedStringKey) -> some View {

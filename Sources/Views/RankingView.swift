@@ -28,6 +28,10 @@ struct RankingView: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            if let me = appState.player, let coins = appState.coins {
+                CoinsHeader(name: me.name, coins: coins)
+            }
+
             SectionDivider()
 
             GeometryReader { geo in

@@ -14,6 +14,10 @@ final class AppState: ObservableObject {
     @Published private(set) var phase: Phase = .loading
     @Published var player: Player?
     @Published var games: [Game] = []
+    /// nil until the initial fetch resolves. Shown by each of the three main
+    /// tabs (Games/Ranking/Help) — owned here, not per-view, so there's a
+    /// single source of truth instead of N separate fetches.
+    @Published private(set) var coins: Int?
 
     private let api = BattleshipAPI.shared
     /// Keeps `games` current for as long as the app is signed in, independent
@@ -40,6 +44,7 @@ final class AppState: ObservableObject {
             PushManager.shared.currentPlayer = fetchedPlayer
             PushManager.shared.requestAuthorizationAndRegister()
             await refreshGames()
+            await refreshCoins()
             phase = .ready
             beginLiveUpdates()
         } catch {
@@ -57,6 +62,7 @@ final class AppState: ObservableObject {
         PushManager.shared.requestAuthorizationAndRegister()
         Task {
             await refreshGames()
+            await refreshCoins()
             phase = .ready
             beginLiveUpdates()
         }
@@ -92,10 +98,16 @@ final class AppState: ObservableObject {
                     try? await Task.sleep(nanoseconds: 3_000_000_000)
                     if Task.isCancelled { return }
                     await self.refreshGames()
+                    await self.refreshCoins()
                 }
             }()
             _ = await (pushDriven, polling)
         }
+    }
+
+    func refreshCoins() async {
+        guard let player else { return }
+        coins = try? await api.getCoins(for: player.name)
     }
 
     func refreshGames() async {

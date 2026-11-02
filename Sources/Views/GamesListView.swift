@@ -10,6 +10,10 @@ struct GamesListView: View {
     var body: some View {
         NavigationStack(path: $path) {
             VStack(spacing: 0) {
+                if let me = appState.player, let coins = appState.coins {
+                    CoinsHeader(name: me.name, coins: coins)
+                }
+
                 SectionDivider()
 
                 List {
