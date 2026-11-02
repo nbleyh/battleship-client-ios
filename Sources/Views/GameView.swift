@@ -14,14 +14,30 @@ struct GameView: View {
     }
 
     var body: some View {
+        VStack(spacing: 0) {
+            // Same "name: N Coins" bar as the three main tabs' — shown for
+            // every game, not just remote ones. Fixed above the scroll area
+            // (not inside it), same as the tabs, so it reads identically and
+            // doesn't scroll away when switching into a game.
+            if let coins = viewModel.coins {
+                CoinsHeader(name: viewModel.me.name, coins: coins)
+                    .padding(.bottom, 10)
+            }
+
+            gameScrollContent
+        }
+        .screenBackground()
+        .navigationBarBackButtonHidden(true)
+        .onAppear {
+            viewModel.configure(appState: appState)
+            viewModel.start()
+        }
+        .onDisappear { viewModel.stop() }
+    }
+
+    private var gameScrollContent: some View {
         ScrollView {
             VStack(spacing: 10) {
-                // Same "name: N Coins" bar as the three main tabs' — shown
-                // for every game, not just remote ones.
-                if let coins = viewModel.coins {
-                    CoinsHeader(name: viewModel.me.name, coins: coins)
-                }
-
                 Text(viewModel.actionText)
                     .foregroundColor(viewModel.actionIsRed ? .red : .white)
 
@@ -62,13 +78,6 @@ struct GameView: View {
             }
             .padding(.vertical, 12)
         }
-        .screenBackground()
-        .navigationBarBackButtonHidden(true)
-        .onAppear {
-            viewModel.configure(appState: appState)
-            viewModel.start()
-        }
-        .onDisappear { viewModel.stop() }
     }
 
     /// Tapping toggles `isDoubleShotSelected` (bold border while selected),

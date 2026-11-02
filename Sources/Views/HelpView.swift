@@ -8,6 +8,9 @@ struct HelpView: View {
         VStack(spacing: 0) {
             if let me = appState.player, let coins = appState.coins {
                 CoinsHeader(name: me.name, coins: coins)
+                    .padding(.bottom, 10)
+            } else {
+                SectionDivider()
             }
 
             helpScrollContent
@@ -18,8 +21,6 @@ struct HelpView: View {
     private var helpScrollContent: some View {
         ScrollView {
             VStack(spacing: 16) {
-                SectionDivider()
-
                 sectionHeader("help_section_1_title")
 
                 Text("help_text")

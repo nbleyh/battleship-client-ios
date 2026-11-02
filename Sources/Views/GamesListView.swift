@@ -12,9 +12,10 @@ struct GamesListView: View {
             VStack(spacing: 0) {
                 if let me = appState.player, let coins = appState.coins {
                     CoinsHeader(name: me.name, coins: coins)
+                        .padding(.bottom, 10)
+                } else {
+                    SectionDivider()
                 }
-
-                SectionDivider()
 
                 List {
                     ForEach(appState.games) { game in

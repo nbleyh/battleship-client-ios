@@ -30,9 +30,10 @@ struct RankingView: View {
         VStack(spacing: 0) {
             if let me = appState.player, let coins = appState.coins {
                 CoinsHeader(name: me.name, coins: coins)
+                    .padding(.bottom, 10)
+            } else {
+                SectionDivider()
             }
-
-            SectionDivider()
 
             GeometryReader { geo in
                 let columnWidth = (geo.size.width - horizontalPadding * 2) / 5
