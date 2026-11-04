@@ -49,3 +49,5 @@
 "mode_computer_hard" = "Computer - Hard";
 "mode_random_player" = "Random Player";
 "mode_selected_player" = "Selected Player";
+"connection_error" = "Could not reach the server. Check your connection and try again.";
+"Retry" = "Retry";

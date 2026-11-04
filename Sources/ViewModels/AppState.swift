@@ -9,6 +9,14 @@ final class AppState: ObservableObject {
         case loading
         case needsRegistration
         case ready
+        /// Fetching the saved player failed, but not because the server said
+        /// the player doesn't exist (that's `.needsRegistration`) — a
+        /// transient network/connectivity issue instead. The locally saved
+        /// identity is deliberately left alone here: discarding it on a mere
+        /// network blip used to force a real re-registration, which the
+        /// server rejects outright for a name that's still taken, leaving no
+        /// way back in except abandoning the account.
+        case connectionError
     }
 
     @Published private(set) var phase: Phase = .loading
@@ -38,6 +46,7 @@ final class AppState: ObservableObject {
             phase = .needsRegistration
             return
         }
+        phase = .loading
         do {
             let fetchedPlayer = try await api.getPlayer(named: name)
             player = fetchedPlayer
@@ -48,10 +57,17 @@ final class AppState: ObservableObject {
             phase = .ready
             beginLiveUpdates()
         } catch {
-            // Player no longer exists on the server (or the fetch failed) —
-            // fall back to registration, mirroring StartActivity.onResponse.
-            PlayerStore.clear()
-            phase = .needsRegistration
+            if let apiError = error as? APIError, apiError.isNotFound {
+                // The server explicitly says this player no longer exists —
+                // fall back to registration, mirroring StartActivity.onResponse.
+                PlayerStore.clear()
+                phase = .needsRegistration
+            } else {
+                // Anything else (no connectivity, a timeout, a 5xx) is
+                // transient — offer a retry instead of discarding the saved
+                // player name over what might just be a bad network moment.
+                phase = .connectionError
+            }
         }
     }
 

@@ -43,3 +43,5 @@
 "mode_computer_hard" = "Computer - Schwer";
 "mode_random_player" = "Zufälliger Spieler";
 "mode_selected_player" = "Ausgewählter Spieler";
+"connection_error" = "Server nicht erreichbar. Verbindung prüfen und erneut versuchen.";
+"Retry" = "Erneut versuchen";

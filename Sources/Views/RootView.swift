@@ -16,6 +16,18 @@ struct RootView: View {
                 RegisterView()
             case .ready:
                 MainTabView()
+            case .connectionError:
+                ZStack {
+                    Theme.background.ignoresSafeArea()
+                    VStack(spacing: 16) {
+                        Text("connection_error")
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 24)
+                        Button("Retry") { appState.start() }
+                            .buttonStyle(BattleshipButtonStyle())
+                    }
+                }
             }
         }
         .onAppear { appState.start() }

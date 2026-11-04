@@ -25,8 +25,21 @@ final class RegisterViewModel: ObservableObject {
                 isRegistering = false
                 onSuccess(player)
             } catch let error as APIError where error.isPlayerAlreadyExists {
-                isRegistering = false
-                errorMessage = String(format: NSLocalizedString("player_already_exists", comment: ""), trimmed)
+                // There's no password here — a name is the whole identity —
+                // so a name that's already taken is, in practice, just as
+                // likely to be this same person signing back in after their
+                // locally saved name got lost (a reinstall, or AppState
+                // wiping it after a network hiccup once did exactly this)
+                // as it is a genuine collision. Fetch and sign in as that
+                // player instead of dead-ending on an error with no way back
+                // into an account that's still sitting on the server.
+                if let existingPlayer = try? await api.getPlayer(named: trimmed) {
+                    isRegistering = false
+                    onSuccess(existingPlayer)
+                } else {
+                    isRegistering = false
+                    errorMessage = String(format: NSLocalizedString("player_already_exists", comment: ""), trimmed)
+                }
             } catch {
                 isRegistering = false
                 errorMessage = String(localized: "app_error")
