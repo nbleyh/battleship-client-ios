@@ -14,6 +14,13 @@ final class PushManager: NSObject {
     /// pushed to the server (mirrors Android's `NewTokenReceiver`).
     var currentPlayer: Player?
 
+    /// TEMPORARY, alongside postDiagnosticNotification — cancelled by
+    /// didCompleteApnsRegistration() as soon as AppDelegate's success/failure
+    /// callback fires. If neither ever fires, this is the only way to find
+    /// out: every other failure path here already posts its own diagnostic,
+    /// but a registration that just never calls back wouldn't hit any of them.
+    private var registrationWatchdog: Task<Void, Never>?
+
     private override init() {
         super.init()
     }
@@ -25,7 +32,10 @@ final class PushManager: NSObject {
     }
 
     func requestAuthorizationAndRegister() {
-        guard FirebaseConfig.isConfigured else { return }
+        guard FirebaseConfig.isConfigured else {
+            postDiagnosticNotification("GoogleService-Info.plist missing or still a placeholder — push setup skipped entirely before even requesting authorization.")
+            return
+        }
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { [weak self] granted, error in
             if let error {
                 print("PushManager: notification authorization request failed: \(error)")
@@ -33,10 +43,12 @@ final class PushManager: NSObject {
             }
             guard granted else {
                 print("PushManager: notification authorization denied — no token will be registered")
+                Task { @MainActor in self?.postDiagnosticNotification("Notification authorization is not granted (granted=false, no error) — no token will be registered.") }
                 return
             }
             Task { @MainActor in
                 UIApplication.shared.registerForRemoteNotifications()
+                self?.startRegistrationWatchdog()
                 // Deliberately NOT calling syncCurrentToken() here: the APNs
                 // device token this depends on hasn't round-tripped to Apple's
                 // servers yet (registerForRemoteNotifications() only *starts*
@@ -46,6 +58,23 @@ final class PushManager: NSObject {
                 // token can be requested.
             }
         }
+    }
+
+    private func startRegistrationWatchdog() {
+        registrationWatchdog?.cancel()
+        registrationWatchdog = Task { [weak self] in
+            try? await Task.sleep(nanoseconds: 15_000_000_000)
+            guard !Task.isCancelled else { return }
+            self?.postDiagnosticNotification("registerForRemoteNotifications() never called back within 15s — neither didRegisterForRemoteNotificationsWithDeviceToken nor didFailToRegisterForRemoteNotificationsWithError fired.")
+        }
+    }
+
+    /// Called from AppDelegate's didRegisterForRemoteNotificationsWithDeviceToken
+    /// and didFailToRegisterForRemoteNotificationsWithError — either one means
+    /// the watchdog above found its answer and doesn't need to fire.
+    func didCompleteApnsRegistration() {
+        registrationWatchdog?.cancel()
+        registrationWatchdog = nil
     }
 
     /// Called from AppDelegate once the APNs device token is confirmed set on
@@ -74,11 +103,15 @@ final class PushManager: NSObject {
                     self?.postDiagnosticNotification("Got FCM token but no signed-in player yet.")
                     return
                 }
-                guard player.firebaseToken != token else { return }
+                guard player.firebaseToken != token else {
+                    self?.postDiagnosticNotification("Push OK — server already has the current token (name: \(player.name)).")
+                    return
+                }
                 player.firebaseToken = token
                 self?.currentPlayer = player
                 do {
                     _ = try await BattleshipAPI.shared.updatePlayer(player)
+                    self?.postDiagnosticNotification("Push OK — token sent to server successfully (name: \(player.name)).")
                 } catch {
                     print("PushManager: sending FCM token to server failed: \(error)")
                     self?.postDiagnosticNotification("Sending FCM token to server failed: \(error.localizedDescription)")
@@ -120,12 +153,13 @@ final class PushManager: NSObject {
 
     /// TEMPORARY — push registration has been silently failing in the field
     /// with no way to see why (TestFlight only, no cable on hand to watch the
-    /// Xcode console). Surfaces the failure as a visible notification instead,
-    /// so it can be read directly off the device. Remove once push
-    /// registration is confirmed reliably working again.
+    /// Xcode console). Surfaces every step (failure *and* success) as a
+    /// visible notification instead, so the whole chain can be read directly
+    /// off the device. Remove once push registration is confirmed reliably
+    /// working again.
     private func postDiagnosticNotification(_ message: String) {
         let content = UNMutableNotificationContent()
-        content.title = "Push setup failed"
+        content.title = "Push diagnostic"
         content.body = message
         content.sound = .default
         let request = UNNotificationRequest(identifier: "push-diagnostic-\(UUID())", content: content, trigger: nil)

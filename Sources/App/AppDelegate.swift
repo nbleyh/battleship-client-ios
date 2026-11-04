@@ -24,6 +24,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         // called any earlier (e.g. right after requestAuthorizationAndRegister's
         // registerForRemoteNotifications() call).
         Task { @MainActor in
+            PushManager.shared.didCompleteApnsRegistration()
             PushManager.shared.syncCurrentToken()
         }
     }
@@ -36,11 +37,12 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         print("AppDelegate: APNs registration failed: \(error)")
         // TEMPORARY diagnostic — see PushManager.postDiagnosticNotification.
         let content = UNMutableNotificationContent()
-        content.title = "Push setup failed"
+        content.title = "Push diagnostic"
         content.body = "APNs registration failed: \(error.localizedDescription)"
         content.sound = .default
         let request = UNNotificationRequest(identifier: "push-diagnostic-apns-\(UUID())", content: content, trigger: nil)
         UNUserNotificationCenter.current().add(request)
+        Task { @MainActor in PushManager.shared.didCompleteApnsRegistration() }
     }
 
     func application(
