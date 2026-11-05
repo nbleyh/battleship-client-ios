@@ -21,6 +21,13 @@ final class PushManager: NSObject {
     /// but a registration that just never calls back wouldn't hit any of them.
     private var registrationWatchdog: Task<Void, Never>?
 
+    /// Same idea, one step later: covers Messaging.messaging().token(...)'s
+    /// completion handler never firing at all (as opposed to firing with an
+    /// error, which already posts its own diagnostic below) — distinct from
+    /// registrationWatchdog, since APNs registration can succeed while this
+    /// FCM-side call still hangs.
+    private var tokenFetchWatchdog: Task<Void, Never>?
+
     private override init() {
         super.init()
     }
@@ -71,10 +78,17 @@ final class PushManager: NSObject {
 
     /// Called from AppDelegate's didRegisterForRemoteNotificationsWithDeviceToken
     /// and didFailToRegisterForRemoteNotificationsWithError — either one means
-    /// the watchdog above found its answer and doesn't need to fire.
-    func didCompleteApnsRegistration() {
+    /// the watchdog above found its answer and doesn't need to fire. The
+    /// success case also gets its own diagnostic (the failure case already
+    /// posts one, from AppDelegate directly) so a silent hang at the *next*
+    /// step (syncCurrentToken's FCM token fetch) isn't mistaken for APNs
+    /// registration itself never completing.
+    func didCompleteApnsRegistration(succeeded: Bool) {
         registrationWatchdog?.cancel()
         registrationWatchdog = nil
+        if succeeded {
+            postDiagnosticNotification("APNs registration succeeded — now waiting on Messaging.messaging().token(...).")
+        }
     }
 
     /// Called from AppDelegate once the APNs device token is confirmed set on
@@ -86,7 +100,17 @@ final class PushManager: NSObject {
     /// one-shot event never fires, leaving `firebase_token` empty forever —
     /// mirrors Android's analogous `syncCurrentFcmToken`.
     func syncCurrentToken() {
+        tokenFetchWatchdog?.cancel()
+        tokenFetchWatchdog = Task { [weak self] in
+            try? await Task.sleep(nanoseconds: 15_000_000_000)
+            guard !Task.isCancelled else { return }
+            self?.postDiagnosticNotification("Messaging.messaging().token(...) never called back within 15s — APNs registration itself completed, but fetching the FCM token from Firebase is what's hanging.")
+        }
         Messaging.messaging().token { [weak self] token, error in
+            Task { @MainActor in
+                self?.tokenFetchWatchdog?.cancel()
+                self?.tokenFetchWatchdog = nil
+            }
             if let error {
                 print("PushManager: fetching FCM token failed: \(error)")
                 Task { @MainActor in self?.postDiagnosticNotification("Fetching FCM token failed: \(error.localizedDescription)") }

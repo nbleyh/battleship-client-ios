@@ -24,7 +24,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         // called any earlier (e.g. right after requestAuthorizationAndRegister's
         // registerForRemoteNotifications() call).
         Task { @MainActor in
-            PushManager.shared.didCompleteApnsRegistration()
+            PushManager.shared.didCompleteApnsRegistration(succeeded: true)
             PushManager.shared.syncCurrentToken()
         }
     }
@@ -42,7 +42,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         content.sound = .default
         let request = UNNotificationRequest(identifier: "push-diagnostic-apns-\(UUID())", content: content, trigger: nil)
         UNUserNotificationCenter.current().add(request)
-        Task { @MainActor in PushManager.shared.didCompleteApnsRegistration() }
+        Task { @MainActor in PushManager.shared.didCompleteApnsRegistration(succeeded: false) }
     }
 
     func application(
